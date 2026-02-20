@@ -33,6 +33,30 @@ export class User {
     @Prop()
     refreshTokenExpires?: Date;
 
+    @Prop({
+        type: [{
+            street: { type: String },
+            city: { type: String },
+            state: { type: String },
+            zip: { type: String },
+            country: { type: String },
+            phone: { type: String },
+            type: { type: String, enum: ['shipping', 'billing'], default: 'shipping' },
+            isDefault: { type: Boolean, default: false }
+        }],
+        _id: false
+    })
+    addresses: {
+        street: string;
+        city: string;
+        state: string;
+        zip: string;
+        country: string;
+        phone: string;
+        type: string;
+        isDefault: boolean;
+    }[];
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);//built-in function je automatically

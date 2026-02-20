@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsString,
   IsArray,
   IsBoolean,
   IsMongoId,
@@ -67,12 +68,6 @@ export class CreateProductDto {
   @Min(0)
   stock: number;
 
-  @ApiPropertyOptional({
-    description: 'Stock Keeping Unit identifier',
-    example: 'IPHONE-15-PRO-128-BLK'
-  })
-  @IsOptional()
-  sku?: string;
 
   @ApiPropertyOptional({
     description: 'Array of image URLs for the product',
@@ -84,10 +79,10 @@ export class CreateProductDto {
   images?: string[];
 
   @ApiProperty({
-    description: 'Category ID (MongoDB ObjectId)',
-    example: '60d5ecb8b487342e4c8b4567'
+    description: 'Category ID or Category Slug',
+    example: 'electronics'
   })
-  @IsMongoId()
+  @IsString()
   category: string;
 
   @ApiPropertyOptional({
@@ -116,4 +111,22 @@ export class CreateProductDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Available colors for the product',
+    type: [String],
+    example: ['Red', 'Blue', 'Black']
+  })
+  @IsOptional()
+  @IsArray()
+  colors?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Available sizes for the product',
+    type: [String],
+    example: ['S', 'M', 'L', 'XL']
+  })
+  @IsOptional()
+  @IsArray()
+  sizes?: string[];
 }

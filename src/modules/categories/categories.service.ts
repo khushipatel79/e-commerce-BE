@@ -1,9 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Category, CategoryDocument } from './schemas/category.schema';
 import { Model } from 'mongoose';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import slugify from 'slugify';
+import { CategoryQueryDto } from './dto/category-query.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -13,11 +15,14 @@ export class CategoriesService {
     ) { }
 
     async create(data: CreateCategoryDto, userId: string) {
+        const slug = data.slug
+            ? slugify(data.slug, { lower: true })
+            : slugify(data.title, { lower: true });
 
         const existing = await this.categoryModel.findOne({
             $or: [
                 { title: data.title },
-                { slug: data.slug }
+                { slug: slug }
             ]
         });
 
@@ -27,13 +32,15 @@ export class CategoriesService {
 
         const category = new this.categoryModel({
             ...data,
+            slug,
             createdBy: userId
         });
 
         return category.save();
     }
 
-    async findAll(page = 1, limit = 10, search?: string) {
+    async findAll(queryDto: CategoryQueryDto) {
+        const { page = 1, limit = 10, search, parentCategory } = queryDto;
 
         const query: any = { isActive: true };
 
@@ -41,10 +48,15 @@ export class CategoriesService {
             query.title = { $regex: search, $options: 'i' };
         }
 
+        if (parentCategory) {
+            query.parentCategory = parentCategory;
+        }
+
         const skip = (page - 1) * limit;
 
         const categories = await this.categoryModel
             .find(query)
+            .populate('parentCategory', 'title slug')
             .skip(skip)
             .limit(limit)
             .sort({ createdAt: -1 });
@@ -59,30 +71,49 @@ export class CategoriesService {
         };
     }
 
-    async update(id: string, data: UpdateCategoryDto) {
-
-        const category = await this.categoryModel.findById(id);
-
+    async findOne(id: string): Promise<CategoryDocument> {
+        const category = await this.categoryModel.findById(id).populate('parentCategory', 'title slug');
         if (!category) {
-            throw new BadRequestException('Category not found');
+            throw new NotFoundException('Category not found');
+        }
+        return category;
+    }
+
+    async findOneBySlug(slug: string): Promise<CategoryDocument> {
+        const category = await this.categoryModel.findOne({ slug }).populate('parentCategory', 'title slug');
+        if (!category) {
+            throw new NotFoundException('Category not found');
+        }
+        return category;
+    }
+
+    async update(id: string, data: UpdateCategoryDto) {
+        if (data.title && !data.slug) {
+            data.slug = slugify(data.title, { lower: true });
+        } else if (data.slug) {
+            data.slug = slugify(data.slug, { lower: true });
         }
 
-        Object.assign(category, data);
+        const category = await this.categoryModel.findByIdAndUpdate(id, data, { new: true });
 
-        return category.save();
+        if (!category) {
+            throw new NotFoundException('Category not found');
+        }
+
+        return category;
     }
 
     async softDelete(id: string) {
-
-        const category = await this.categoryModel.findById(id);
+        const category = await this.categoryModel.findByIdAndDelete(id, { isActive: false });
 
         if (!category) {
-            throw new BadRequestException('Category not found');
+            throw new NotFoundException('Category not found');
         }
 
-        category.isActive = false;
-
-        return category.save();
+        return { message: 'Category deleted successfully' };
     }
 
+    async getSubcategories(parentId: string): Promise<CategoryDocument[]> {
+        return this.categoryModel.find({ parentCategory: parentId, isActive: true }).exec();
+    }
 }

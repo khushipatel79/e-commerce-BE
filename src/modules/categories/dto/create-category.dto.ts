@@ -15,12 +15,12 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   title: string;
 
-  @ApiProperty({
-    description: 'The slug for the category URL',
+  @ApiPropertyOptional({
+    description: 'The slug for the category URL (auto-generated if empty)',
     example: 'electronics'
   })
-  @IsNotEmpty()
-  slug: string;
+  @IsOptional()
+  slug?: string;
 
   @ApiPropertyOptional({
     description: 'A detailed description of the category',

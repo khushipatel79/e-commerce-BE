@@ -30,4 +30,22 @@ export class UsersService {
     });
   }
 
+  async findAll(): Promise<UserDocument[]> {
+    return this.userModel.find().exec();
+  }
+
+  async update(id: string, data: Partial<User>): Promise<UserDocument | null> {
+    return this.userModel.findByIdAndUpdate(id, data, { new: true }).exec();
+  }
+
+  async remove(id: string): Promise<UserDocument | null> {
+    return this.userModel.findByIdAndDelete(id).exec();
+  }
+
+  async findByRefreshToken(token: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({
+      refreshToken: token,
+      refreshTokenExpires: { $gt: new Date() },
+    });
+  }
 }

@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Document, Types } from 'mongoose';
 
 export type ProductDocument = Product & Document;
@@ -27,9 +28,6 @@ export class Product {
   @Prop({ required: true })
   stock: number;
 
-  @Prop({ unique: true })
-  sku: string;
-
   @Prop({ type: [String], default: [] })
   images: string[];
 
@@ -38,6 +36,14 @@ export class Product {
 
   @Prop({ type: [String], default: [] })
   tags: string[];
+
+  @ApiPropertyOptional({ description: 'Available colors' })
+  @Prop({ type: [String], default: [] })
+  colors: string[];
+
+  @ApiPropertyOptional({ description: 'Available sizes' })
+  @Prop({ type: [String], default: [] })
+  sizes: string[];
 
   @Prop({ default: 0 })
   ratingsAverage: number;

@@ -1,0 +1,201 @@
+📄 E-Commerce Website Documentation
+1. Project Title
+E-Commerce Website with Admin Panel
+________________________________________
+2. Project Overview
+This project is a modern e-commerce website that allows users to browse products, view details, add items to cart, and purchase products online. The system includes a powerful admin panel that helps manage products, users, orders, and website content.
+The website focuses on providing a simple, attractive, and user-friendly shopping experience.
+________________________________________
+3. User Roles
+3.1 Customer (User)
+Customer can browse and purchase products.
+3.2 Admin
+Admin controls and manages the entire website and data.
+________________________________________
+4. User Website Modules
+________________________________________
+4.1 Navbar Section
+Navbar will be available on all pages and include:
+•	Website Logo
+•	Home Page Navigation
+•	Shop Page Navigation
+•	About Page Navigation
+•	Search Box
+•	Favourite Products
+•	Shopping Cart
+________________________________________
+4.2 Footer Section
+Footer will contain:
+•	Website Details
+•	Shop Navigation Links
+•	Help Section
+•	About Section
+•	Contact Information
+________________________________________
+5. Website Pages & Features
+________________________________________
+5.1 Home Page
+Features:
+•	Banner Section
+•	Categories Display Section
+•	Discount / Latest Product Section
+•	Policy Section
+o	Free Shipping Information
+o	Return Policy Details
+o	Payment Information
+•	High Demand / Popular Products
+•	Contact Section
+________________________________________
+5.2 Shop Page
+Features:
+•	Product Categories
+•	Product Filter Option
+•	Product Search
+•	Product Listing Grid
+________________________________________
+5.3 Product Details Page
+Features:
+•	Product Image Gallery
+•	Product Tag Display
+•	Product Category
+•	Product Title
+•	Product Price
+•	Product Description
+•	Product Color Selection
+•	Product Size Selection
+•	Add to Cart Option
+•	Favourite / Wishlist Option
+•	Customer Review and Rating Section 
+•	Policy Information
+•	Product Additional Details
+•	Related Products Section
+________________________________________
+5.4 Category Product Listing
+Each product card will display:
+•	Product Image
+•	Product Category with Rating
+•	Product Title
+•	Product Price
+•	Available Color
+•	Available Size
+________________________________________
+5.5 About Page
+Features:
+•	About Banner
+•	Website Description
+•	Our Mission Section
+•	Our Values Section
+•	Team Member Details
+•	Testimonials Section
+•	Contact Information
+________________________________________
+6. Customer Functional Features
+•	User Registration
+•	User Login / Logout
+•	Product Browsing
+•	Product Search & Filter
+•	Add to Cart
+•	Wishlist Management
+•	Order Placement
+•	Order History
+•	Profile Management
+•	Address Management
+•	Product Review and Rating Submission
+________________________________________
+7. Admin Panel Modules (System Management)
+________________________________________
+7.1 Admin Dashboard
+Admin dashboard will show:
+•	Total Products
+•	Total Orders
+•	Total Users
+•	Revenue Summary
+•	Sales Analytics
+•	Recent Orders
+•	Low Stock Alert
+________________________________________
+7.2 Product Management
+Admin can:
+•	Add New Product
+•	Update Product
+•	Delete Product
+•	Upload Product Images
+•	Manage Product Colors & Sizes
+•	Set Product Tags
+•	Set Product Pricing
+•	Manage Product Stock
+________________________________________
+7.3 Category Management
+Admin can:
+•	Create Category
+•	Update Category
+•	Delete Category
+•	Manage Category Display
+________________________________________
+7.4 Order Management
+Admin can:
+•	View All Orders
+•	Update Order Status
+•	Cancel Orders
+•	Process Refund Requests
+•	Generate Invoice
+•	Track Order Details
+________________________________________
+7.5 User Management
+Admin can:
+•	View User List
+•	View User Order History
+•	Block / Activate Users
+•	Manage User Information
+________________________________________
+7.6 Review & Testimonial Management
+Admin can:
+•	View Customer Reviews
+•	Approve Reviews
+•	Delete Reviews
+•	Manage Testimonials
+________________________________________
+7.7 Banner & Content Management
+Admin can:
+•	Manage Homepage Banner
+•	Manage Promotional Sections
+•	Update Website Content
+•	Manage About Page Content
+________________________________________
+7.8 Discount & Offer Management
+Admin can:
+•	Create Discount Offers
+•	Manage Coupon Codes
+•	Set Promotional Pricing
+________________________________________
+7.9 Inventory Management
+Admin can:
+•	Track Product Stock
+•	Get Low Stock Notifications
+•	Update Stock Quantity
+________________________________________
+7.10 Policy & Information Management
+Admin can update:
+•	Shipping Policy
+•	Return Policy
+•	Payment Information
+•	Help Section Content
+________________________________________
+8. Security Features
+•	Authentication System
+•	Role Based Access Control
+•	Secure Payment Handling
+•	Data Validation
+________________________________________
+9. Technology Stack (Proposed)
+Frontend
+•	Next.js
+•	Tailwind CSS
+Backend
+•	 NestJS
+Database
+•	MongoDB 
+________________________________________
+11. Project Outcome
+The system will provide a complete online shopping platform with user-friendly interface and powerful admin management features.
+
